@@ -4,12 +4,14 @@ import { Card } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
 const Ride = (props) => {
-    const { imgUrl, title, rideType } = props.vehicle;
+    const { imgUrl, title, rideType, bed } = props.vehicle;
+    // const imgAndRideType = { imgUrl, rideType };
+    // console.log(imgAndRideType);
 
     const history = useHistory();
 
-    const handleBook = (rideType) => {
-        history.push(`/orderRide/${rideType}`);
+    const handleBook = (destination) => {
+        history.push(`/orderRide/${destination}`);
     }
     return (
         <div onClick={() => handleBook(rideType)}>

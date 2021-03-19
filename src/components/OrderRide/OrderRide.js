@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useParams } from 'react-router';
 
 const OrderRide = () => {
-    const {rideType, imgUrl, bed} = useParams();
+    const {destination} = useParams();
+    console.log(destination);
+
+
+    // const [ride, setRide] = useState();
+    // useEffect(()=>{
+    //     fetch(destination)
+    //     .then(res => console.log(res))
+    //     .then(data => console.log(data))
+    //     // console.log(res);
+    // })
+
+
     return (
         <Row>
             <Col xs={6} md={4}>
                 <h3>Uttara to Farmgate</h3>
                 <Row>
-                    <Col><h4>{bed}</h4></Col>
-                    <Col><h4>{rideType}</h4></Col>
+                    <Col><img src="" alt=""/></Col>
+                    <Col><h4>{destination}</h4></Col>
                     <Col><h4>2</h4></Col>
                     <Col><h4>$100</h4></Col>
                 </Row>
