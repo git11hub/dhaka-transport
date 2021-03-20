@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import OrderRide from './components/OrderRide/OrderRide';
 import Signup from './components/Signup/Signup';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
@@ -29,9 +30,9 @@ function App() {
             <Route path="/home">
               <Home />
             </Route>
-            <Route path="/orderRide/:destination">
+            <PrivateRoute path="/orderRide/:destination">
               <OrderRide />
-            </Route>
+            </PrivateRoute>
             <Route path="/login">
               <Login />
             </Route>
