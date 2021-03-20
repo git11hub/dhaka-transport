@@ -26,8 +26,7 @@ function App() {
   const [vehicle, setVehicle] = useState({});
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <VehiclesContext.Provider value={[vehicle, setVehicle]}>
-        <p>Name: {loggedInUser.name}</p>
+      <VehiclesContext.Provider value={[vehicle, setVehicle]}>        
         <Container>
           <Router>
             <Header />

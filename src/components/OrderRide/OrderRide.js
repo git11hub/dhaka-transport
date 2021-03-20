@@ -5,6 +5,9 @@ import { useParams } from 'react-router';
 import { VehiclesContext } from '../../App';
 
 const OrderRide = () => {
+    
+    const [show, setShow] = useState(true);
+
     const { destination } = useParams();
     // console.log(destination);
     
@@ -15,16 +18,15 @@ const OrderRide = () => {
     return (
         <Row>
             <Col xs={6} md={4}>
-                <Row>
+                {show?<Row>
                     <Form.Group>
                         <Form.Control size="lg" type="text" placeholder="Pick From" />
                         <br />
                         <Form.Control size="lg" type="text" placeholder="Pick To" />
                         <br />
-                        <Button variant="danger" size="lg" block>Search</Button>
+                        <Button onClick={() =>setShow(!show)} variant="danger" size="lg" block>Search</Button>
                     </Form.Group>
-                </Row>
-
+                </Row>:
 
                 <Row className="mt-5">
                     <h3>Uttara to Farmgate:</h3>
@@ -46,7 +48,7 @@ const OrderRide = () => {
                         <Col md={1}><h4>2</h4></Col>
                         <Col md={2}><h4>$100</h4></Col>
                     </Row>
-                </Row>
+                </Row>}
             </Col>
             <Col xs={6} md={4}>
                 <img src="https://i.ibb.co/2cd3CM8/Map.png" alt="" />

@@ -5,7 +5,7 @@ import firebaseConfig from './firebase.config';
 import { UserContext } from '../../App';
 import { useForm } from 'react-hook-form';
 import './Login.css';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const Login = () => {
     //new line
