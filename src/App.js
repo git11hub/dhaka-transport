@@ -16,36 +16,42 @@ import Signup from './components/Signup/Signup';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
+//test
+export const VehiclesContext = createContext();
 
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  //test
+  const [vehicle, setVehicle] = useState({});
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <p>Name: {loggedInUser.name}</p>
-      <Container>
-        <Router>
-          <Header />
-          <Switch>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <PrivateRoute path="/orderRide/:destination">
-              <OrderRide />
-            </PrivateRoute>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
+      <VehiclesContext.Provider value={[vehicle, setVehicle]}>
+        <p>Name: {loggedInUser.name}</p>
+        <Container>
+          <Router>
+            <Header />
+            <Switch>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <PrivateRoute path="/orderRide/:destination">
+                <OrderRide />
+              </PrivateRoute>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <Signup />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
 
-          </Switch>
-        </Router>
-      </Container>
+            </Switch>
+          </Router>
+        </Container>
+      </VehiclesContext.Provider>
     </UserContext.Provider>
   );
 }

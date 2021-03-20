@@ -15,7 +15,7 @@ const Ride = (props) => {
     }
     return (
         <div onClick={() => handleBook(rideType)}>
-            <Card style={{ width: '16rem' }}>
+            <Card className="m-1" style={{ width: '16rem' }}>
                 <Card.Img variant="top" src={imgUrl} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>

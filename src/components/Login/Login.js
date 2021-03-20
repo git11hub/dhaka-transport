@@ -68,7 +68,7 @@ const Login = () => {
 
                 // The signed-in user info.
                 var user = result.user;
-                console.log(user);
+                // console.log(user);
                 setLoggedInUser(user);
                 // ...
             }).catch((error) => {
@@ -86,7 +86,8 @@ const Login = () => {
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-        console.log('form submitted', data);
+        // console.log('form submitted', data);
+        // console.log('I am clicked');
 
         //new line
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
@@ -106,18 +107,18 @@ const Login = () => {
 
     }
 
-    console.log(watch("example")); // watch input value by passing the name of it
+    // console.log(watch("example")); // watch input value by passing the name of it
     return (
 
         < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
 
-            < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
+            {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
             { errors.email && <span className="error">Email is required</span>}
 
             < input type="password" name="password" ref={register({ required: true })} placeholder="Password" />
-            { errors.password && <span className="error">Password is required</span>}
-
-            <input type="submit" value="Submit" />
+            { errors.password && <span className="error">Password is required</span>} */}
+            {/* <input type="submit" value="Submit" /> */}
+            
 
             <br />
             <button onClick={handleGoogleSignIn}>Google Sign In</button>
