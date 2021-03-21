@@ -1,10 +1,16 @@
 import { Button } from 'react-bootstrap';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { VehiclesContext } from '../../App';
 
 const Ride = (props) => {
-    const { imgUrl, title, rideType, bed } = props.vehicle;
+    const { imgUrl, title, rideType } = props.vehicle;
+
+    const [vehicle, setVehicle] = useContext(VehiclesContext);
+    setVehicle(imgUrl);
+    
+    // console.log(vehicle);
     // const imgAndRideType = { imgUrl, rideType };
     // console.log(imgAndRideType);
 

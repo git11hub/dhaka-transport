@@ -30,7 +30,7 @@ const Login = () => {
         firebase.initializeApp(firebaseConfig);
     }
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = (e) => {
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth()
             .signInWithPopup(provider)
@@ -50,11 +50,12 @@ const Login = () => {
                 var credential = error.credential;
                 // ...
             });
+        e.preventDefault();
     }
 
     // Github Sign In
 
-    const handleGitHubSignIn = () => {        
+    const handleGitHubSignIn = () => {
         var githubProvider = new firebase.auth.GithubAuthProvider();
         firebase
             .auth()
@@ -79,6 +80,7 @@ const Login = () => {
                 var email = error.email;
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
+                // console.log(errorMessage);
                 // ...
             });
     }
@@ -86,53 +88,69 @@ const Login = () => {
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-        // console.log('form submitted', data);
-        // console.log('I am clicked');
+        console.log(data);
+        firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+            .then((userCredential) => {
+                var user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(error);
+            });
 
-        //new line
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        // testing and delete imediately
+        firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
             .then((userCredential) => {
                 // Signed in 
                 var user = userCredential.user;
-                setUser(user);
                 // ...
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                console.log(error);
                 // ..
             });
-        // data.preventDefault();
-        //new line
-
-    }
+    };
 
     // console.log(watch("example")); // watch input value by passing the name of it
     return (
+        <>
+            < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
 
-        < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
-
-            {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
+                {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
             { errors.email && <span className="error">Email is required</span>}
 
             < input type="password" name="password" ref={register({ required: true })} placeholder="Password" />
             { errors.password && <span className="error">Password is required</span>} */}
-            {/* <input type="submit" value="Submit" /> */}
-            
+                {/* <input type="submit" value="Submit" /> */}
+                <input type="email" name="email" ref={register} placeholder="email" />
+                {errors.email && <span className="error">Email is required</span>}
 
-            <br />
+                <input type="password" name="password" ref={register} placeholder="password" />
+                {errors.password && <span className="error">Password is required</span>}
+
+                <br />
+                <button type="submit">Login</button>
+
+                <br />
+            </form >
+
+            <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+                <h3>Sign Up Form</h3>
+                <input type="text" name="name" ref={register} placeholder="name" />
+                <input type="email" name="email" ref={register} placeholder="email" />
+                <input type="password" name="password" ref={register} placeholder="password" />
+                <button type="submit">Submit</button>
+            </form>
             <button onClick={handleGoogleSignIn}>Google Sign In</button>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <button onClick={handleGitHubSignIn}>Git Hub Sign In</button>
-        </form >
 
-
-
-        // <div>
-        //     <h1>This login page...</h1>
-        //     <button onClick={handleGoogleSignIn}>Google Signin</button>
-        // </div>
+        </>
     );
 };
 
