@@ -25,6 +25,7 @@ const Login = () => {
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
 
+    console.log(from);
 
     if (firebase.apps.length === 0) {
         firebase.initializeApp(firebaseConfig);
@@ -37,6 +38,7 @@ const Login = () => {
             .then((result) => {
                 const { displayName, email } = result.user;
                 const signedInUser = { name: displayName, email };
+                // setUser(signedInUser);
                 setLoggedInUser(signedInUser);
                 history.replace(from);
                 // ...
@@ -48,6 +50,8 @@ const Login = () => {
                 var email = error.email;
                 // The firebase.auth.AuthCredential type that was used.
                 var credential = error.credential;
+                console.log(error);
+                console.log(errorMessage);
                 // ...
             });
         e.preventDefault();
@@ -90,9 +94,12 @@ const Login = () => {
     const onSubmit = data => {
         console.log(data);
         firebase.auth().signInWithEmailAndPassword(data.email, data.password)
-            .then((userCredential) => {
-                var user = userCredential.user;
-                console.log(user);
+            .then((res) => {
+                console.log(res);
+                // var user = userCredential.user;
+                // console.log(user);
+                setLoggedInUser(res.user);
+                history.replace(from);
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -100,10 +107,10 @@ const Login = () => {
                 console.log(error);
             });
 
-        // testing and delete imediately
+        // testing Sign Up area Working
+
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
             .then((userCredential) => {
-                // Signed in 
                 var user = userCredential.user;
                 // ...
             })
@@ -113,31 +120,32 @@ const Login = () => {
                 console.log(error);
                 // ..
             });
+
+
     };
 
-    // console.log(watch("example")); // watch input value by passing the name of it
     return (
         <>
             < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
-
                 {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
             { errors.email && <span className="error">Email is required</span>}
 
             < input type="password" name="password" ref={register({ required: true })} placeholder="Password" />
             { errors.password && <span className="error">Password is required</span>} */}
                 {/* <input type="submit" value="Submit" /> */}
+                <h3>Login Form</h3>
                 <input type="email" name="email" ref={register} placeholder="email" />
                 {errors.email && <span className="error">Email is required</span>}
 
                 <input type="password" name="password" ref={register} placeholder="password" />
                 {errors.password && <span className="error">Password is required</span>}
 
-                <br />
-                <button type="submit">Login</button>
+                <input type="submit" value="Login" />
+                {/* <button type="submit">Login</button> */}
 
                 <br />
             </form >
-
+           
             <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
                 <h3>Sign Up Form</h3>
                 <input type="text" name="name" ref={register} placeholder="name" />
@@ -145,6 +153,8 @@ const Login = () => {
                 <input type="password" name="password" ref={register} placeholder="password" />
                 <button type="submit">Submit</button>
             </form>
+
+
             <button onClick={handleGoogleSignIn}>Google Sign In</button>
             <br />
             <br />

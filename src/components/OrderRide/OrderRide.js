@@ -10,14 +10,14 @@ const OrderRide = () => {
     const [show, setShow] = useState(true);
 
     const { destination } = useParams();
-    console.log(destination);
+    // console.log(destination);
 
     //test
     const [vehicle, setVehicle] = useContext(VehiclesContext);
-    console.log(vehicle);
+    // console.log(vehicle);
 
     const transport = vehicles.map(vehicle => vehicle).filter(d => d.rideType === destination);
-    console.log(transport[0]);
+    // console.log(transport[0]);
     const {rideType, imgUrl} = transport[0];
     return (
         <Row>

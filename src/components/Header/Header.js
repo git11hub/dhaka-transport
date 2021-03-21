@@ -13,10 +13,12 @@ const Header = () => {
                 <Nav.Link href="/home">Home</Nav.Link>
                 <Nav.Link href="/orderRide/Bike">Order-Ride</Nav.Link>
                 <Nav.Link href="/blog">Blog</Nav.Link>
-                
-                <Button href="/login" variant="primary">Login</Button>
+
+                {loggedInUser.email ?<Button href="/login" variant="primary">Log Out</Button>:
+                    <Button href="/login" variant="primary">Login</Button>
+                }
                 <Nav.Link href="/contact">{loggedInUser.name}</Nav.Link>
-                
+
             </Nav>
         </Navbar>
 
