@@ -16,4 +16,4 @@
 - React Bootstrap
 - Firebase
 
-Thanks to firebase hosting system. Here is the live website link: [Dhaka Transport](https://react-auth-249ac.web.app)
+**Thanks to Firebase for hosting.** Here is the live website link: [Dhaka Transport](https://react-auth-249ac.web.app)
