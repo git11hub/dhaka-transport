@@ -107,11 +107,12 @@ const Login = () => {
                 console.log(error);
             });
 
-        // testing Sign Up area Working
+        // testing Sign Up area Working::::::::::::::::
 
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
             .then((userCredential) => {
                 var user = userCredential.user;
+                history.replace(from);
                 // ...
             })
             .catch((error) => {
@@ -126,6 +127,8 @@ const Login = () => {
 
     return (
         <>
+            <input type="checkbox" onChange={() =>setNewUser(!newUser)} name="newUser" id=""/>
+            <label htmlFor="newUser">New User Register</label>
             < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
                 {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
             { errors.email && <span className="error">Email is required</span>}
@@ -134,25 +137,28 @@ const Login = () => {
             { errors.password && <span className="error">Password is required</span>} */}
                 {/* <input type="submit" value="Submit" /> */}
                 <h3>Login Form</h3>
+                {newUser &&<input type="text" name="name" ref={register} placeholder="name" />}
+                
                 <input type="email" name="email" ref={register} placeholder="email" />
                 {errors.email && <span className="error">Email is required</span>}
 
                 <input type="password" name="password" ref={register} placeholder="password" />
                 {errors.password && <span className="error">Password is required</span>}
 
-                <input type="submit" value="Login" />
+                {newUser ?<input type="submit" value="Register" />:
+                <input type="submit" value="Login" />}
                 {/* <button type="submit">Login</button> */}
 
                 <br />
             </form >
            
-            <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+            {/* <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
                 <h3>Sign Up Form</h3>
                 <input type="text" name="name" ref={register} placeholder="name" />
                 <input type="email" name="email" ref={register} placeholder="email" />
                 <input type="password" name="password" ref={register} placeholder="password" />
                 <button type="submit">Submit</button>
-            </form>
+            </form> */}
 
 
             <button onClick={handleGoogleSignIn}>Google Sign In</button>
