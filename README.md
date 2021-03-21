@@ -8,7 +8,6 @@
 - Login & Registration system with email, gmail, github
 - Toggle
 - Private Route
-- 
 
 ### I Used
 - React
