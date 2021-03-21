@@ -8,7 +8,6 @@ import './Login.css';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const Login = () => {
-    //new line
     const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
         isSignedIn: false,
@@ -17,8 +16,6 @@ const Login = () => {
         password: '',
         photo: ''
     });
-    //new line
-
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
@@ -38,21 +35,10 @@ const Login = () => {
             .then((result) => {
                 const { displayName, email } = result.user;
                 const signedInUser = { name: displayName, email };
-                // setUser(signedInUser);
                 setLoggedInUser(signedInUser);
                 history.replace(from);
-                // ...
             }).catch((error) => {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-                console.log(error);
-                console.log(errorMessage);
-                // ...
+
             });
         e.preventDefault();
     }
@@ -65,27 +51,15 @@ const Login = () => {
             .auth()
             .signInWithPopup(githubProvider)
             .then((result) => {
-                /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential;
 
-                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
                 var token = credential.accessToken;
 
-                // The signed-in user info.
                 var user = result.user;
-                // console.log(user);
                 setLoggedInUser(user);
-                // ...
+                history.replace(from);
             }).catch((error) => {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-                // console.log(errorMessage);
-                // ...
+                console.log(error);
             });
     }
 
@@ -96,8 +70,6 @@ const Login = () => {
         firebase.auth().signInWithEmailAndPassword(data.email, data.password)
             .then((res) => {
                 console.log(res);
-                // var user = userCredential.user;
-                // console.log(user);
                 setLoggedInUser(res.user);
                 history.replace(from);
             })
@@ -107,19 +79,15 @@ const Login = () => {
                 console.log(error);
             });
 
-        // testing Sign Up area Working::::::::::::::::
-
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
             .then((userCredential) => {
                 var user = userCredential.user;
                 history.replace(from);
-                // ...
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(error);
-                // ..
             });
 
 
@@ -127,39 +95,23 @@ const Login = () => {
 
     return (
         <>
-            <input type="checkbox" onChange={() =>setNewUser(!newUser)} name="newUser" id=""/>
+            <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
             <label htmlFor="newUser">New User Register</label>
             < form className="login-form" onSubmit={handleSubmit(onSubmit)} >
-                {/* < input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
-            { errors.email && <span className="error">Email is required</span>}
-
-            < input type="password" name="password" ref={register({ required: true })} placeholder="Password" />
-            { errors.password && <span className="error">Password is required</span>} */}
-                {/* <input type="submit" value="Submit" /> */}
                 <h3>Login Form</h3>
-                {newUser &&<input type="text" name="name" ref={register} placeholder="name" />}
-                
+                {newUser && <input type="text" name="name" ref={register} placeholder="name" />}
+
                 <input type="email" name="email" ref={register} placeholder="email" />
                 {errors.email && <span className="error">Email is required</span>}
 
                 <input type="password" name="password" ref={register} placeholder="password" />
                 {errors.password && <span className="error">Password is required</span>}
 
-                {newUser ?<input type="submit" value="Register" />:
-                <input type="submit" value="Login" />}
-                {/* <button type="submit">Login</button> */}
+                {newUser ? <input type="submit" value="Register" /> :
+                    <input type="submit" value="Login" />}
 
                 <br />
             </form >
-           
-            {/* <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <h3>Sign Up Form</h3>
-                <input type="text" name="name" ref={register} placeholder="name" />
-                <input type="email" name="email" ref={register} placeholder="email" />
-                <input type="password" name="password" ref={register} placeholder="password" />
-                <button type="submit">Submit</button>
-            </form> */}
-
 
             <button onClick={handleGoogleSignIn}>Google Sign In</button>
             <br />

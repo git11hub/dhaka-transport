@@ -41,20 +41,6 @@ const Home = () => {
         justifyContent: 'space-between'
     }
 
-    
-    //test
-    // const [vehicle, setVehicle] = useState([]);
-
-    // const [vehicle, setVehicle] = useContext(VehiclesContext);
-
-    // useEffect(() => {
-    //     vehicles.map(vehicle => setVehicle(vehicle))
-    //     // setVehicle(vehicles)
-    // }, []);
-
-
-    // console.log(vehicle);
-
     return (
         <>
             <Row className="d-flex justify-content-center mt-5">
